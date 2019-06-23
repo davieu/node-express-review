@@ -1,17 +1,20 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
-const bodyParser = require('body-parser');
 const app = express();
-const moment = require('moment')
 
 // const members = require('./data/Members')
 const logger = require('./middleware/middleware.js')
 
 // INIT MIDDLEWARE
-// app.use(logger);
+app.use(logger);
 
-/*
+// Body Parser Middleware
+app.use(express.json());
+// For Form Submissions - Handle urlencoded data
+app.use(express.urlencoded({ extended: false }))
+
+/* 
+//GRABS THE JSON DATA THAT I MADE. NOT BEING USED THOUGH
 fs.readFile(path.join(path.join('C:/Users/davis/code/node-practice/express-review/', '/data', 'members.json')), 'utf8', (err, data) => {
   if (err) throw err
   membersJSON = JSON.parse(data)
