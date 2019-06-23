@@ -44,7 +44,9 @@ router.post('/', (req, res) => {
   }
 
   members.push(newMember);
-  res.json(members)
+  // res.json(members)
+  //The res.redirect is for templates. To serve to the template comment out the bottom or top
+  res.redirect('/');
 });
 
 // Update Member
@@ -74,11 +76,9 @@ router.delete('/:id', (req, res) => {
     let index = members.findIndex(member => member.id == req.params.id)
     console.log(index)
     members.splice(index, 1)
-
-    res.json(members)
-    // res.json({ 
-    //   msg: 'Member deleted',
-    //   members: members.forEach(member => member.id != req.params.id)})
+    // res.json({ msg: 'Member deleted', members })
+    res.redirect('/');
+    // res.json({ msg: 'Member deleted', members: members.filter(member => member.id != req.params.id) })
   } else {
     res.status(400).json({ msg: `No member found with the ID of ${req.params.id}` })
   }
