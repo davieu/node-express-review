@@ -5,48 +5,24 @@ const bodyParser = require('body-parser');
 const app = express();
 const moment = require('moment')
 
-const members = require('./data/Members')
+// const members = require('./data/Members')
 const logger = require('./middleware/middleware.js')
-
-
-let membersJSON = []
 
 // INIT MIDDLEWARE
 // app.use(logger);
 
-fs.readFile(path.join(__dirname, '/data', 'members.json'), 'utf8', (err, data) => {
+/*
+fs.readFile(path.join(path.join('C:/Users/davis/code/node-practice/express-review/', '/data', 'members.json')), 'utf8', (err, data) => {
   if (err) throw err
   membersJSON = JSON.parse(data)
 });
-
-// GETS ALL MEMBERS FROM JSON
-app.get('/api/members', (req, res) => {
-  res.json(membersJSON);
-})
-
-// GET ALL MEMBER FROM JS OBJECT
-app.get('/api/membersjs', (req, res) => {
-  res.json(members);
-})
-
-// GET SINGLE MEMBER
-app.get('/api/member/:id', (req, res) => {
-  // res.json(membersJSON[req.params.id])
-  res.json(membersJSON.filter(member => member.id === parseInt(req.params.id)))
-})
-
-// GET ALL ACTIVE MEMBERS
-app.get('/api/members-active', (req, res) => {
-  res.json(membersJSON.filter(member => member.status == 'active'))
-}) 
-
-//GET ALL INACTIVE MEMBERS
-app.get('/api/members-inactive', (req, res) => {
-  res.json(membersJSON.filter(member => member.status == 'inactive'))
-})
+*/
 
 // SET STATIC FOLDER
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Members API routes
+app.use('/api/members', require('./routes/api/members'))
 
 const PORT = process.env.PORT || 5000;
 
